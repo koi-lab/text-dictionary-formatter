@@ -2,17 +2,16 @@
   #include "language.tab.h"
 %}
 
-ws    [ \t\n]+
-
 %%
 
-{ws}                { /* do nothing */ }
+[ \t\n]+            { /* do nothing */ }
 "|"                 { return PIPE; }
 "["                 { return LBRACKET; }
 "]"                 { return RBRACKET; }
 "•"                 { return DOT; }
 "."                 { return PERIOD; }
 ":"                 { return COLON; }
+[0-9]+              { return NUMBER; }
 "mainly"            { return MAINLY; }
 
 "British"|"North American"|"Northern English"|"Scottish"|"South Asian"|"US"                      { return ADJECTIVAL; }
