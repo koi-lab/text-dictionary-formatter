@@ -1,40 +1,43 @@
 %{
     #include "language.tab.h"
     
-    #include <stido.h>
-    #intlude <stdlib.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    extern int yylex();
+    void yyerror(char *s);
 %}
 
-%token PIPE LBRACKET RBRACKET DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO DISCIPLINE
+%token PIPE LBRACKET RBRACKET DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO_HEADER DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT WILDCARD
 
 %%
 
-start: WORD_AND_PRONUNCIATION_GUIDE pronunciation entry REGISTER
+start: WORD_AND_PRONUNCIATION_GUIDE pronunciation entry rest
 ;
 entry: PART_OF_SPEECH definition entry
         | /*empty*/
 ;
 
-definition: number definition-with-example-sentences specififc-definition
+definition: number definition_with_example_sentences specific_definition
 ;
-specific-definition: DOT definition-with-example-sentences specific-definition
+specific_definition: DOT definition_with_example_sentences specific_definition
         | /*empty*/
 ;
-definition-with-example-sentences: attribute TEXT COLON example-sentences
+definition_with_example_sentences: attribute TEXT COLON example_sentences
 ;
-example-sentences : COLON TEXT example-sentences-with-pipe PERIOD 
+example_sentences : COLON TEXT example_sentences_with_pipe PERIOD 
                     | PERIOD
 ;
-example-sentences-with-pipe: PIPE TEXT 
+example_sentences_with_pipe: PIPE TEXT 
                             |  /*empty*/
 ;
 
 
 pronunciation: PIPE TEXT PIPE ;
 
-attribute: usage-info mainly adjectival register discipline ;
+attribute: usage_info mainly adjectival register discipline ;
 
-usage-info: LBRACKET TEXT RBRACKET 
+usage_info: LBRACKET TEXT RBRACKET 
           | /* empty */ 
           ;
 
@@ -71,4 +74,9 @@ void yyerror(char *s) {
 
 void parse() {
     yyparse();
+}
+
+int main() {
+    yyparse();
+    return 0;
 }

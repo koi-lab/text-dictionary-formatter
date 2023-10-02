@@ -2,6 +2,10 @@
   #include "language.tab.h"
 %}
 
+%option noyywrap
+
+bullet_point [\u2022]
+
 %%
 
 [ \t\n]+            { /* do nothing */ }
@@ -21,8 +25,8 @@
 
 "Anatomy"|"Architecture"|"Baseball"|"Biology"|"Botany"|"Chemistry"|"Computing"|"Electronics"|"Golf"|"Grammar"|"Geology"|"Geometry"|"Heraldry"|"Law"|"Linguistics"|"Logic"|"Mathematics"|"Medicine"|"Microbiology"|"Military"|"Music"|"Philosophy"|"Photography"|"Physics"|"Printing"|"Prosody"|"Psychoanalysis"|"Theology"|"Zoology"            { return DISCIPLINE; }
 
-[^|\[\]•.:]+          { return TEXT; }
-([a-z]+ [a-z•]*)      { return WORD_AND_PRONUNCIATION_GUIDE; }
-.+                    { return WILDCARD; }
+[a-z]+\s[a-z\u2022]+        { return WORD_AND_PRONUNCIATION_GUIDE; }
+[^\u2022|\[\].:]+          { return TEXT; }
+.+                         { return WILDCARD; }
 
 %%
