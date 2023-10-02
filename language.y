@@ -11,6 +11,39 @@
 
 start: ;
 
+
+pronunciation: PIPE TEXT PIPE ;
+
+attribute: usage-info mainly adjectival register discipline ;
+
+usage-info: LBRACKET TEXT RBRACKET 
+          | /* empty */ 
+          ;
+
+mainly: MAINLY
+      | /* empty */
+      ;
+
+adjectival: ADJECTIVAL
+          | /* empty */
+          ;
+
+register: REGISTER 
+        | /* empty */ 
+        ;
+
+discipline: DISCIPLINE
+          | /* empty */ 
+          ;
+
+number: NUMBER
+      | /* empty */
+      ;
+
+rest: ADDITIONAL_INFO_HEADER WILDCARD
+    | /* empty */
+    ;
+
 %%
 
 void yyerror(char *s) {
