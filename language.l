@@ -17,6 +17,7 @@ bullet_point [\u2022]
 ":"                 { return COLON; }
 [0-9]+              { return NUMBER; }
 "mainly"            { return MAINLY; }
+"end"               { return END; }
 
 "British"|"North American"|"Northern English"|"Scottish"|"South Asian"|"US"                      { return ADJECTIVAL; }
 "archaic"|"dialect"|"formal"|"historical"|"humorous"|"informal"|"litarary"|"rare"|"technical"    { return REGISTER; }
@@ -25,8 +26,8 @@ bullet_point [\u2022]
 
 "Anatomy"|"Architecture"|"Baseball"|"Biology"|"Botany"|"Chemistry"|"Computing"|"Electronics"|"Golf"|"Grammar"|"Geology"|"Geometry"|"Heraldry"|"Law"|"Linguistics"|"Logic"|"Mathematics"|"Medicine"|"Microbiology"|"Military"|"Music"|"Philosophy"|"Photography"|"Physics"|"Printing"|"Prosody"|"Psychoanalysis"|"Theology"|"Zoology"            { return DISCIPLINE; }
 
-[a-z]+\s[a-z\u2022]+        { return WORD_AND_PRONUNCIATION_GUIDE; }
-[^\u2022|\[\].:]+          { return TEXT; }
+[a-z]+\s[a-z•]+        { return WORD_AND_PRONUNCIATION_GUIDE; }
+[^(•|\[\].:)]+          { return TEXT; }
 .+                         { return WILDCARD; }
 
 %%
