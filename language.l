@@ -22,7 +22,7 @@
 
 "Anatomy"|"Architecture"|"Baseball"|"Biology"|"Botany"|"Chemistry"|"Computing"|"Electronics"|"Golf"|"Grammar"|"Geology"|"Geometry"|"Heraldry"|"Law"|"Linguistics"|"Logic"|"Mathematics"|"Medicine"|"Microbiology"|"Military"|"Music"|"Philosophy"|"Photography"|"Physics"|"Printing"|"Prosody"|"Psychoanalysis"|"Theology"|"Zoology"            { return DISCIPLINE; }
 
-[a-z]+\s[a-z•]+        { return WORD_AND_PRONUNCIATION_GUIDE; }
+[a-z]+[ ][a-z]+           { return WORD_AND_PRONUNCIATION_GUIDE; }
 [^(•|\[\].:\n)]+          { return TEXT; }
 .                         { return WILDCARD; }
 
