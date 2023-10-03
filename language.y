@@ -8,11 +8,11 @@
     void yyerror(char *s);
 %}
 
-%token PIPE LBRACKET RBRACKET DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO_HEADER DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT WILDCARD END
+%token PIPE DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO_HEADER DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT WILDCARD END USAGE_INFO
 
 %%
 
-start: WORD_AND_PRONUNCIATION_GUIDE pronunciation entry rest END
+start: WORD_AND_PRONUNCIATION_GUIDE pronunciation entry END
 ;
 entry: PART_OF_SPEECH definition entry
         | /*empty*/
@@ -25,11 +25,11 @@ specific_definition: DOT definition_with_example_sentences specific_definition
 ;
 definition_with_example_sentences: attribute TEXT COLON example_sentences
 ;
-example_sentences : COLON TEXT example_sentences_with_pipe PERIOD 
+example_sentences: TEXT example_sentences_with_pipe
                     | PERIOD
 ;
-example_sentences_with_pipe: PIPE TEXT 
-                            |  /*empty*/
+example_sentences_with_pipe: PIPE TEXT example_sentences_with_pipe
+                            |  PERIOD
 ;
 
 
@@ -37,7 +37,7 @@ pronunciation: PIPE TEXT PIPE ;
 
 attribute: usage_info mainly adjectival register discipline ;
 
-usage_info: LBRACKET TEXT RBRACKET 
+usage_info: USAGE_INFO
           | /* empty */ 
           ;
 
