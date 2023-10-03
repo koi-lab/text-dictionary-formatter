@@ -12,7 +12,7 @@
 
 %%
 
-start: WORD_AND_PRONUNCIATION_GUIDE pronunciation entry END
+start: WORD_AND_PRONUNCIATION_GUIDE entry rest END
 ;
 entry: PART_OF_SPEECH definition entry
         | /*empty*/
@@ -32,8 +32,6 @@ example_sentences_with_pipe: PIPE TEXT example_sentences_with_pipe
                             |  PERIOD
 ;
 
-
-pronunciation: PIPE TEXT PIPE ;
 
 attribute: usage_info mainly adjectival register discipline ;
 
