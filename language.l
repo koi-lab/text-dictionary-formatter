@@ -19,7 +19,7 @@
 "British"|"North American"|"Northern English"|"Scottish"|"South Asian"|"US"|"North American English"                      { printf("Matched ADJECTIVAL '%s'\n", yytext); return ADJECTIVAL; }
 "archaic"|"dialect"|"formal"|"historical"|"humorous"|"informal"|"litarary"|"rare"|"technical"    { printf("Matched REGISTER '%s'\n", yytext); return REGISTER; }
 "adjective"|"adverb"|"conjunction"|"exclamation"|"noun"|"preposition"|"pronoun"|"verb"           { printf("Matched PART_OF_SPEECH '%s'\n", yytext); return PART_OF_SPEECH; }
-("DERIVATIVES"|"ORIGIN"|"PHRASES"|"PHRASAL VERBS").+                                             { printf("Matched ADDITIONAL_INFO '%s'\n", yytext); return ADDITIONAL_INFO; }
+("DERIVATIVES"|"ORIGIN"|"PHRASES"|"PHRASAL VERBS"|"USAGE").+                                             { printf("Matched ADDITIONAL_INFO '%s'\n", yytext); return ADDITIONAL_INFO; }
 
 "Anatomy"|"Architecture"|"Baseball"|"Biology"|"Botany"|"Chemistry"|"Computing"|"Electronics"|"Golf"|"Grammar"|"Geology"|"Geometry"|"Heraldry"|"Law"|"Linguistics"|"Logic"|"Mathematics"|"Medicine"|"Microbiology"|"Military"|"Music"|"Philosophy"|"Photography"|"Physics"|"Printing"|"Prosody"|"Psychoanalysis"|"Theology"|"Zoology"            { printf("Matched DISCIPLINE: %s\n", yytext); return DISCIPLINE; }
 
@@ -35,7 +35,7 @@
                                 REJECT;                                
                             }
 
-                            const char* stringArray[] = {"mainly", "British","North American","Northern English","Scottish","South Asian","US","archaic","dialect","formal","historical","humorous","informal","litarary","rare","technical","adjective","adverb","conjunction","exclamation","noun","preposition","pronoun","verb","DERIVATIVES","ORIGIN","PHRASES","PHRASAL VERBS","Anatomy","Architecture","Baseball","Biology","Botany","Chemistry","Computing","Electronics","Golf","Grammar","Geology","Geometry","Heraldry","Law","Linguistics","Logic","Mathematics","Medicine","Microbiology","Military","Music","Philosophy","Photography","Physics","Printing","Prosody","Psychoanalysis","Theology","Zoology"};
+                            const char* stringArray[] = {"mainly", "British","North American","Northern English","Scottish","South Asian","US","archaic","dialect","formal","historical","humorous","informal","litarary","rare","technical","adjective","adverb","conjunction","exclamation","noun","preposition","pronoun","verb","DERIVATIVES","ORIGIN","PHRASES","PHRASAL VERBS", "USAGE", "Anatomy","Architecture","Baseball","Biology","Botany","Chemistry","Computing","Electronics","Golf","Grammar","Geology","Geometry","Heraldry","Law","Linguistics","Logic","Mathematics","Medicine","Microbiology","Military","Music","Philosophy","Photography","Physics","Printing","Prosody","Psychoanalysis","Theology","Zoology"};
                             for (int i = 0; i < sizeof(stringArray) / sizeof(stringArray[0]); i++) {
                                 const char* element = stringArray[i];
                                 int elementLength = strlen(element);
