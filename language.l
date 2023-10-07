@@ -47,7 +47,7 @@
                             /*printf("Matched TEXT: %s\n", yytext); */
                             return TEXT;
                           }
-.                         { return WILDCARD; }
+.                         { }
 
 %%
 
