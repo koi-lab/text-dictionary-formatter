@@ -7,7 +7,7 @@
 %%
 
 
-" "        { }
+" "                 { }
 "|"                 { return PIPE; }
 "•"                 { return DOT; }
 "."                 { return PERIOD; }
@@ -28,11 +28,13 @@
 [^•|\[\].:\n]+            { if (isdigit(yytext[0])) {
                                 yyless(1);   
                                 REJECT;      
-                            }                       
+                            }    
+
                             if (yytext[0] == ' ') {
                                 yyless(1);
                                 REJECT;                                
                             }
+
                             const char* stringArray[] = {"British","North American","Northern English","Scottish","South Asian","US","archaic","dialect","formal","historical","humorous","informal","litarary","rare","technical","adjective","adverb","conjunction","exclamation","noun","preposition","pronoun","verb","DERIVATIVES","ORIGIN","PHRASES","PHRASAL VERBS","Anatomy","Architecture","Baseball","Biology","Botany","Chemistry","Computing","Electronics","Golf","Grammar","Geology","Geometry","Heraldry","Law","Linguistics","Logic","Mathematics","Medicine","Microbiology","Military","Music","Philosophy","Photography","Physics","Printing","Prosody","Psychoanalysis","Theology","Zoology"};
                             for (int i = 0; i < sizeof(stringArray) / sizeof(stringArray[0]); i++) {
                                 const char* element = stringArray[i];
@@ -45,8 +47,8 @@
                             }
                             printf("Matched TEXT: %s\n", yytext); 
                             return TEXT;
-                        }
-.                         { return WILDCARD; }
+                          }
+.                         { }
 
 %%
 
