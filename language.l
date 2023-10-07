@@ -35,7 +35,7 @@
                                 REJECT;                                
                             }
 
-                            const char* stringArray[] = {"British","North American","Northern English","Scottish","South Asian","US","archaic","dialect","formal","historical","humorous","informal","litarary","rare","technical","adjective","adverb","conjunction","exclamation","noun","preposition","pronoun","verb","DERIVATIVES","ORIGIN","PHRASES","PHRASAL VERBS","Anatomy","Architecture","Baseball","Biology","Botany","Chemistry","Computing","Electronics","Golf","Grammar","Geology","Geometry","Heraldry","Law","Linguistics","Logic","Mathematics","Medicine","Microbiology","Military","Music","Philosophy","Photography","Physics","Printing","Prosody","Psychoanalysis","Theology","Zoology"};
+                            const char* stringArray[] = {"mainly", "British","North American","Northern English","Scottish","South Asian","US","archaic","dialect","formal","historical","humorous","informal","litarary","rare","technical","adjective","adverb","conjunction","exclamation","noun","preposition","pronoun","verb","DERIVATIVES","ORIGIN","PHRASES","PHRASAL VERBS","Anatomy","Architecture","Baseball","Biology","Botany","Chemistry","Computing","Electronics","Golf","Grammar","Geology","Geometry","Heraldry","Law","Linguistics","Logic","Mathematics","Medicine","Microbiology","Military","Music","Philosophy","Photography","Physics","Printing","Prosody","Psychoanalysis","Theology","Zoology"};
                             for (int i = 0; i < sizeof(stringArray) / sizeof(stringArray[0]); i++) {
                                 const char* element = stringArray[i];
                                 int elementLength = strlen(element);

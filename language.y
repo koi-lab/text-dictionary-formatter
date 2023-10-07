@@ -14,6 +14,7 @@
 
 start: WORD_AND_PRONUNCIATION_GUIDE entry rest END
 ;
+
 entry: PART_OF_SPEECH definition entry
         | /*empty*/
 ;
