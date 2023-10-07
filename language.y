@@ -18,12 +18,18 @@ entry: PART_OF_SPEECH definition entry
         | /*empty*/
 ;
 
-definition: number definition_with_example_sentences specific_definition
+definition: number definition_with_example_sentences specific_definition definitionmore
+;
+
+definitionmore: number definition_with_example_sentences specific_definition definitionmore
+            | /*empty*/
 ;
 specific_definition: DOT definition_with_example_sentences specific_definition
         | /*empty*/
 ;
 definition_with_example_sentences: attribute TEXT COLON example_sentences
+                                    | attribute TEXT PERIOD
+                                    | attribute COLON TEXT PERIOD
 ;
 example_sentences: TEXT example_sentences_with_pipe
                     | PERIOD
