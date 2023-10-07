@@ -12,7 +12,7 @@
 %define parse.error verbose
 %%
 
-start: WORD_AND_PRONUNCIATION_GUIDE entry END
+start: WORD_AND_PRONUNCIATION_GUIDE entry rest END
 ;
 entry: PART_OF_SPEECH definition entry
         | /*empty*/
@@ -60,6 +60,7 @@ number: NUMBER
       ;
 
 rest: ADDITIONAL_INFO_HEADER WILDCARD
+    | ADDITIONAL_INFO_HEADER TEXT
     | /* empty */
     ;
 
