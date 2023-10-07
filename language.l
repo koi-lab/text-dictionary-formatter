@@ -29,16 +29,9 @@
                                 yyless(1);   
                                 REJECT;      
                             }    
-                            if (strlen(yytext) != 1) {
-                              if (yytext[0] == ' ') {
-                                  yyless(1);
-                                  REJECT;                                
-                            }
 
-                            }
-
-                            if (yytext[strlen(yytext)-1] == ' ') {
-                                yyless(strlen(yytext)-1);
+                            if (yytext[0] == ' ') {
+                                yyless(1);
                                 REJECT;                                
                             }
 

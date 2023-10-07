@@ -13,34 +13,34 @@
 %%
 
 start: WORD_AND_PRONUNCIATION_GUIDE entry rest END
-;
+     ;
 
 entry: PART_OF_SPEECH definition entry
-        | /*empty*/
-;
+     | /*empty*/
+     ;
 
 definition: number definition_with_example_sentences specific_definition definitionmore
-;
+          ;
 
 definitionmore: number definition_with_example_sentences specific_definition definitionmore
-            | /*empty*/
-;
+              | /*empty*/
+              ;
 
 specific_definition: DOT definition_with_example_sentences specific_definition
-        | /*empty*/
-;
+                   | /*empty*/
+                   ;
 
 definition_with_example_sentences: attribute TEXT COLON example_sentences
-                                    | attribute TEXT PERIOD
-;
+                                 | attribute TEXT PERIOD
+                                 ;
 
 example_sentences: usage_info_with_colon TEXT example_sentences_with_pipe
-                    | PERIOD
-;
+                 | PERIOD
+                 ;
 
 example_sentences_with_pipe: PIPE usage_info_with_colon TEXT example_sentences_with_pipe
-                            |  PERIOD
-;
+                           | PERIOD
+                           ;
 
 
 attribute: usage_info mainly adjectival register discipline ;
