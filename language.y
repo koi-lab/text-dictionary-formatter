@@ -19,6 +19,14 @@
         *s = '\0';
         return s;
     }
+
+    void createHTML(char* s) {
+        FILE *filePointer = fopen("output.html", "w");
+        fprintf(filePointer, "<!DOCTYPE html>\n<html>\n<head>\n<meta charset=\"UTF-16\"><title>KOI</title>\n</head>\n<body style=\"font-family: arial\">\n\n");
+        fprintf(filePointer, s);
+        fprintf(filePointer, "\n\n</body></html>\n");
+        fclose(filePointer);
+    }
 %}
 
 %token <str_value> PIPE DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT END USAGE_INFO PLURAL_FORM
@@ -46,7 +54,7 @@ start: WORD_AND_PRONUNCIATION_GUIDE entry rest END {
     strncpy(pronunciation, p1, pronunciationLength);
     pronunciation[pronunciationLength] = '\0'; 
 
-    char* s = createABigEmptyString(); strcat(s, "<span>"); strcat(s, word_definition); strcat(s, "</span> <span style=\"color: darkgrey\">"); strcat(s, pronunciation); strcat(s, "</span>"); strcat(s, $2); printf("\n%s\n", s); }
+    char* s = createABigEmptyString(); strcat(s, "<span>"); strcat(s, word_definition); strcat(s, "</span> <span style=\"color: darkgrey\">"); strcat(s, pronunciation); strcat(s, "</span>"); strcat(s, $2); createHTML(s); }
      ;
 
 entry: PART_OF_SPEECH plural_form definition entry { char* s = createABigEmptyString(); strcat(s, "<br><br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }

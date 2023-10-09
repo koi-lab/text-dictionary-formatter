@@ -2,6 +2,7 @@ language
 language.tab.c
 language.tab.h
 lex.yy.c
+output.html
 
 # Prerequisites
 *.d
