@@ -8,14 +8,14 @@
     void yyerror(char *s);
 %}
 
-%token PIPE DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT END USAGE_INFO
+%token PIPE DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT END USAGE_INFO PLURAL_FORM
 %define parse.error verbose
 %%
 
 start: WORD_AND_PRONUNCIATION_GUIDE entry rest END
      ;
 
-entry: PART_OF_SPEECH definition entry
+entry: PART_OF_SPEECH plural_form definition entry
      | /*empty*/
      ;
 
@@ -42,6 +42,10 @@ example_sentences_with_pipe: PIPE usage_info_with_colon TEXT example_sentences_w
                            | PERIOD
                            ;
 
+
+plural_form: PLURAL_FORM
+           | /* empty */
+           ;
 
 attribute: usage_info mainly adjectival register discipline ;
 
