@@ -36,6 +36,11 @@
                                 REJECT;                                
                             }
 
+                            if (yytext[yyleng-1]== ' ') {
+                                yyless(yyleng-1);   
+                                REJECT;      
+                            } 
+
                             if (strncmp(yytext, "(plural", 7) == 0) {
                               int i = 0;
                               while (1) {
