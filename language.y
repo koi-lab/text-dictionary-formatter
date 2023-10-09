@@ -22,7 +22,7 @@
 %}
 
 %token <str_value> PIPE DOT PERIOD COLON MAINLY ADJECTIVAL REGISTER PART_OF_SPEECH ADDITIONAL_INFO DISCIPLINE NUMBER WORD_AND_PRONUNCIATION_GUIDE TEXT END USAGE_INFO PLURAL_FORM
-%type <str_value> start entry definition definitionmore specific_definition definition_with_example_sentences example_sentences example_sentences_with_pipe plural_form attribute usage_info_with_colon usage_info mainly adjectival register discipline number rest
+%type <str_value> start entry definition definitionmore specific_definitions definition_with_example_sentences example_sentences example_sentences_with_pipe plural_form attribute usage_info_with_colon usage_info mainly adjectival register discipline number rest
 %define parse.error verbose
 
 %union value {
@@ -39,14 +39,14 @@ entry: PART_OF_SPEECH plural_form definition entry { char* s = createABigEmptySt
      | /*empty*/ { $$ = ""; }
      ;
 
-definition: number definition_with_example_sentences specific_definition definitionmore { char* s = createABigEmptyString(); strcat(s, "<br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
+definition: number definition_with_example_sentences specific_definitions definitionmore { char* s = createABigEmptyString(); strcat(s, "<br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
           ;
 
-definitionmore: number definition_with_example_sentences specific_definition definitionmore { char* s = createABigEmptyString(); strcat(s, "<br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
+definitionmore: number definition_with_example_sentences specific_definitions definitionmore { char* s = createABigEmptyString(); strcat(s, "<br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
               | /*empty*/ { $$ = ""; }
               ;
 
-specific_definition: DOT definition_with_example_sentences specific_definition { char* s = createABigEmptyString(); strcat(s, "<br> • "); strcat(s, $2); strcat(s, $3); $$ = s; }
+specific_definitions: DOT definition_with_example_sentences specific_definitions { char* s = createABigEmptyString(); strcat(s, "<br> • "); strcat(s, $2); strcat(s, $3); $$ = s; }
                    | /*empty*/ { $$ = ""; }
                    ;
 
