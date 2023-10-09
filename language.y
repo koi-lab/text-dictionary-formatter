@@ -32,7 +32,33 @@
 
 %%
 
-start: WORD_AND_PRONUNCIATION_GUIDE entry rest END { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); printf("\n🎉 %s\n", s); }
+start: WORD_AND_PRONUNCIATION_GUIDE entry rest END { 
+    char* word_definition = malloc(100 * sizeof(char));
+    char* pronunciation = malloc(100 * sizeof(char));
+
+    char* spacePos = strchr(s, ' ');
+    
+    if (spacePos != NULL) {
+        int wordLength = spacePos - s;
+
+        strncpy(word_definition, s, wordLength);
+        word_definition[wordLength] = '\0'; 
+    } else {
+        strcpy(word_definition, s);
+    }
+
+    spacePos = strchr(s, '|');
+    
+    if (spacePos != NULL) {
+        wordLength = spacePos - s;
+
+        strncpy(pronunciation, s, wordLength);
+        pronunciation[wordLength] = '\0'; 
+    } else {
+        strcpy(pronunciation, '');
+    }
+
+    char* s = createABigEmptyString(); strcat(s, "<div><span>"); strcat(s, word_definition); strcat(s, "</span><span>"); strcat(s, pronunciation); strcat(</span></div>); strcat(s, $2); printf("\n🎉 %s\n", s); }
      ;
 
 entry: PART_OF_SPEECH plural_form definition entry { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
