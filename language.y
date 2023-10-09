@@ -32,21 +32,21 @@
 
 %%
 
-start: WORD_AND_PRONUNCIATION_GUIDE entry rest END { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); printf("\n🎉 %s\n", s); }
+start: WORD_AND_PRONUNCIATION_GUIDE entry rest END { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); printf("\n%s\n", s); }
      ;
 
-entry: PART_OF_SPEECH plural_form definition entry { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
+entry: PART_OF_SPEECH plural_form definition entry { char* s = createABigEmptyString(); strcat(s, "<br><br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
      | /*empty*/ { $$ = ""; }
      ;
 
-definition: number definition_with_example_sentences specific_definition definitionmore { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
+definition: number definition_with_example_sentences specific_definition definitionmore { char* s = createABigEmptyString(); strcat(s, "<br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
           ;
 
-definitionmore: number definition_with_example_sentences specific_definition definitionmore { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
+definitionmore: number definition_with_example_sentences specific_definition definitionmore { char* s = createABigEmptyString(); strcat(s, "<br>"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, $4); $$ = s; }
               | /*empty*/ { $$ = ""; }
               ;
 
-specific_definition: DOT definition_with_example_sentences specific_definition { char* s = createABigEmptyString(); strcat(s, "• "); strcat(s, $2); strcat(s, $3); $$ = s; }
+specific_definition: DOT definition_with_example_sentences specific_definition { char* s = createABigEmptyString(); strcat(s, "<br> • "); strcat(s, $2); strcat(s, $3); $$ = s; }
                    | /*empty*/ { $$ = ""; }
                    ;
 
@@ -54,7 +54,7 @@ definition_with_example_sentences: attribute TEXT COLON example_sentences { char
                                  | attribute TEXT PERIOD { char* s = createABigEmptyString(); strcat(s, $1); strcat(s, $2); strcat(s, "."); $$ = s; }
                                  ;
 
-example_sentences: usage_info_with_colon TEXT example_sentences_with_pipe { char* s = malloc(1000 * sizeof(char)); strcat(s, $1); strcat(s, $2); strcat(s, $3); $$ = s; }
+example_sentences: usage_info_with_colon TEXT example_sentences_with_pipe { char* s = malloc(1000 * sizeof(char)); strcat(s, "<i style=\"color: darkgrey\">"); strcat(s, $1); strcat(s, $2); strcat(s, $3); strcat(s, "</i>"); $$ = s; }
                  | PERIOD { $$ = "."; }
                  ;
 
@@ -67,7 +67,7 @@ plural_form: PLURAL_FORM { char* s = createABigEmptyString(); strcat(s, " "); st
            | /* empty */ { $$ = createAnEmptyString(); }
            ;
 
-attribute: usage_info mainly adjectival register discipline { strcat($1, $2); strcat($1, $3); strcat($1, $4); strcat($1, $5); $$ = $1; }
+attribute: usage_info mainly adjectival register discipline { char* s = createABigEmptyString(); strcat(s, "<i style=\"color: darkgrey\">"); strcat(s, $2); strcat(s, $3); strcat(s, $4); strcat(s, $5); strcat(s, "</i>"); $$ = s; }
 
 usage_info_with_colon: USAGE_INFO COLON { strcat($1, " : "); $$ = strdup($1); }
                      | /* empty */ { $$ = createAnEmptyString(); }
