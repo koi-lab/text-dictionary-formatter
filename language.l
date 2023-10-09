@@ -25,7 +25,7 @@
 "Anatomy"|"Architecture"|"Baseball"|"Biology"|"Botany"|"Chemistry"|"Computing"|"Electronics"|"Golf"|"Grammar"|"Geology"|"Geometry"|"Heraldry"|"Law"|"Linguistics"|"Logic"|"Mathematics"|"Medicine"|"Microbiology"|"Military"|"Music"|"Philosophy"|"Photography"|"Physics"|"Printing"|"Prosody"|"Psychoanalysis"|"Theology"|"Zoology"            { /* printf("Matched DISCIPLINE: '%s'\n", yytext); */ yylval.str_value = strdup(yytext); return DISCIPLINE; }
 
 \[[a-z ]+\]                                       { /* printf("Matched USAGE_INFO '%s'\n", yytext); */ yylval.str_value = strdup(yytext); return USAGE_INFO; }
-[a-z]+[ ][a-z·]*[ ]?"|"[ ][^|]+[ ]"|"             { printf("\nMatched WORD_AND_PRONUNCIATION_GUIDE '%s'\n", yytext); */ yylval.str_value = strdup(yytext); return WORD_AND_PRONUNCIATION_GUIDE; }
+[a-z]+[ ][a-z·]*[ ]?"|"[ ][^|]+[ ]"|"             { /* printf("\nMatched WORD_AND_PRONUNCIATION_GUIDE '%s'\n", yytext); */ yylval.str_value = strdup(yytext); return WORD_AND_PRONUNCIATION_GUIDE; }
 [^•|\[\].:\n]+            { if (isdigit(yytext[0])) {
                                 yyless(1);   
                                 REJECT;      
